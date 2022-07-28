@@ -1,0 +1,4 @@
+services:
+    action.points_checker:
+        class: IncentiveBundle\Service\PointsChecker
+        arguments: ["@doctrine.orm.entity_manager"]

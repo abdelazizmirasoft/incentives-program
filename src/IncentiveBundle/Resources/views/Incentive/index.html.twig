@@ -1,0 +1,40 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}IncentiveBundle:Incentive:index{% endblock %}
+
+{% block body %}
+<h1>Points list</h1>
+    <ul>
+        <li>
+            <a href="{{ path('action_new') }}">Create a new action</a>
+        </li>
+        <li>
+            <a href="{{ path('points_calculate') }}">Calculate points</a>
+        </li>
+    </ul>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Source id</th>
+            <th>Source type</th>
+            <th>Points</th>
+            <th>Created at</th>
+            <th>Withdrawn</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for point in points %}
+            <tr>
+                <td>{{ point.id }}</td>
+                <td>{% if point.source == 1 %}Delivery{% elseif point.source == 2 %}Rideshare{% else %}Rent{% endif %}</td>
+                <td>{{ point.sourceType }}</td>
+                <td>{{ point.points }}</td>
+                <td>{{ point.createdAt|date('d-m-Y H:m:s') }}</td>
+                <td>{% if point.withdrawn != 0 %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

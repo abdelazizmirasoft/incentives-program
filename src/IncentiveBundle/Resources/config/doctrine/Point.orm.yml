@@ -1,0 +1,26 @@
+IncentiveBundle\Entity\Point:
+    type: entity
+    table: null
+    repositoryClass: IncentiveBundle\Repository\PointsRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        source:
+            type: integer
+        sourceType:
+            type: string
+        withdrawn:
+            type: boolean
+            column: withdrawn
+            options:
+                default: false
+        createdAt:
+            type: datetime
+            column: created_at
+            options:
+                default: CURRENT_TIMESTAMP
+    lifecycleCallbacks: {  }

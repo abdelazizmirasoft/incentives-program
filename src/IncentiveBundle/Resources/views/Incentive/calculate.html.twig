@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Calculate points</h1>
+    {% if totalPoints is not null %}
+        <h1><b> {{ totalPoints }} points</b></h1>
+    {% endif %}
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Calculate" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('incentive_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

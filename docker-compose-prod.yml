@@ -1,0 +1,52 @@
+version: '3'
+
+## NOTES:
+# if you see ${SOME_VAR} in this file,
+# these values are taken from .env file
+
+#########################
+#         PROD          #
+#########################
+
+services:
+
+    nginx:
+        image: nginx
+        restart: "${RESTART_POLICIES}"
+        ports:
+            - "${NGINX_PORT}:80"
+            - "${NGINX_HTTPS_PORT}:443"
+        links:
+            - "symfony:symfony"
+        volumes:
+            - ".:/home/docker"
+            - "./.docker/prod/prod.conf:/etc/nginx/conf.d/default.conf:ro"
+            - "./.data/web:/cert:ro"
+
+    symfony:
+        build:
+            context: ./.docker/prod/
+            args:
+                - "DOCKER_USER=${DOCKER_USER}"
+        image: symfony3_docker:prod
+        restart: "${RESTART_POLICIES}"
+        links:
+            - "db:db"
+        volumes:
+            - ".:/home/docker"
+            - "./.docker/prod/php.ini:/usr/local/etc/php/conf.d/custom.ini:ro"
+        working_dir: "/home/docker"
+        user: "${DOCKER_USER}"
+
+    db:
+        image: mysql:5.7
+        restart: "${RESTART_POLICIES}"
+        environment:
+            - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+            - "MYSQL_USER=${MYSQL_USER}"
+            - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+            - "MYSQL_DATABASE=${MYSQL_DATABASE}"
+        ports:
+            - "${MYSQL_PORT}:3306"
+        volumes:
+          - "./.data/db:/var/lib/mysql:Z"

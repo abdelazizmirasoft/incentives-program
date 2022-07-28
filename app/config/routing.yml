@@ -1,0 +1,3 @@
+incentive:
+    resource: "@IncentiveBundle/Resources/config/routing.yml"
+    prefix:   /

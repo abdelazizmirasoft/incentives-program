@@ -1,0 +1,15 @@
+incentive_homepage:
+    path:     /
+    defaults: { _controller: IncentiveBundle:Incentive:index }
+
+incentive_index:
+    path:     /index
+    defaults: { _controller: IncentiveBundle:Incentive:index }
+
+action_new:
+    path:     /new
+    defaults: { _controller: IncentiveBundle:Incentive:new }
+
+points_calculate:
+    path:     /calculate
+    defaults: { _controller: IncentiveBundle:Incentive:calculate }

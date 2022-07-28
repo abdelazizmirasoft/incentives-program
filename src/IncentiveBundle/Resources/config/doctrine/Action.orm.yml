@@ -1,0 +1,27 @@
+IncentiveBundle\Entity\Action:
+    type: entity
+    table: null
+    repositoryClass: IncentiveBundle\Repository\ActionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        points:
+            type: integer
+        hasBonus:
+            type: boolean
+            column: has_bonus
+            options:
+                default: false
+    oneToMany:
+        boosters:
+            targetEntity: IncentiveBundle\Entity\Booster
+            mappedBy: action
+            cascade: [persist]
+    lifecycleCallbacks: {  }

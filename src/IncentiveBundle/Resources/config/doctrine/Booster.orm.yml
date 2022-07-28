@@ -1,0 +1,39 @@
+IncentiveBundle\Entity\Booster:
+    type: entity
+    table: null
+    repositoryClass: IncentiveBundle\Repository\BoosterRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        points:
+            type: integer
+        timeFrame:
+            type: integer
+            column: time_frame
+        frequency:
+            type: integer
+            column: frequency
+        enabled:
+            type: boolean
+            column: enabled
+            options:
+                default: false
+        createdAt:
+            type: datetime
+            column: created_at
+    manyToOne:
+        action:
+            targetEntity: IncentiveBundle\Entity\Action
+            joinColumn:
+                name: action_id
+                referencedColumnName: id
+            inversedBy: boosters
+
+    lifecycleCallbacks: {  }
